@@ -12,40 +12,41 @@ public class Main {
     };
 
     public static void main(String[] args) {
-//        compareNumbers(5, 8);
-//        evenCheck(666);
+//        System.out.println(compareNumbers(5, 8));
+//        System.out.println(evenCheck(666));
 //        howTimeZone(1);
 //        howTimeZone(7);
 //        howTimeZone(13);
 //        howTimeZone(18);
-//        calculator();
+//        System.out.println(initСalculator());
 //        convertToRomanNumeralSystem(48);
-        System.out.println(isSimpleNumber(283));
+//        System.out.println(isSimpleNumber(283));
 
     }
 
     //    Сравнение чисел
-    public static void compareNumbers(int number1, int number2) {
+    public static String compareNumbers(int number1, int number2) {
+        String result;
         //        Сравнение чисел: Напишите программу, которая сравнивает два числа и определяет, равны ли они или одно больше другого.
         //        Входные данные 5 8    //        Результат Первое число больше второго.
 
         if (number1 > number2) {
-            System.out.println("Первое число больше второго.");
+            result = "Первое число больше второго.";
         } else if (number1 < number2) {
-            System.out.println("Первое число меньше второго.");
+            result = "Первое число меньше второго.";
         } else {
-            System.out.println("Оба числа равны.");
+            result = "Оба числа равны.";
         }
+        return result;
     }
 
 
     //    Проверка на четность
-    public static void evenCheck(int number1) {
+    public static String evenCheck(int number1) {
 //    Проверка на четность: Напишите программу, которая определяет, является ли введенное число четным или нечетным.
 //    Входные данные 12     //    Результат Число четное.
 
-        String result = (number1 % 2 == 0) ? "Число четное" : "Число нечетное";
-        System.out.println(result);
+        return (number1 % 2 == 0) ? "Число четное" : "Число нечетное";
     }
 
 
@@ -61,7 +62,7 @@ public class Main {
     }
 
     //    Калькулятор
-    private static void calculator() {
+    private static Double initСalculator() {
 //    Напишите программу-калькулятор, которая выполняет арифметические операции
 //    (сложение, вычитание, умножение, деление) над двумя числами
 //    в зависимости от выбора пользователя.
@@ -77,16 +78,21 @@ public class Main {
         System.out.print("Введите оерацию + - * /:");
         String operation = sc.next();
 
-        switch (operation) {
-            case "+" -> System.out.println(number1 + number2);
-            case "-" -> System.out.println(number1 - number2);
-            case "/" -> System.out.println(number1 / number2);
-            case "*" -> System.out.println(number1 * number2);
-            default -> System.out.println("Где-то ошибка");
-        }
+        return calculator(number1,number2,operation);
 
     }
 
+
+    private static Double calculator(Double number1, Double number2, String operation){
+        Double result;
+        switch (operation) {
+            case "+" -> result = number1 + number2;
+            case "-" ->  result = number1 - number2;
+            case "/" ->  result = number1 / number2;
+            default -> result = number1 * number2;
+        }
+        return result;
+    }
 
     //    Перевод числа в римскую систему
     private static void convertToRomanNumeralSystem(int number) {
@@ -111,7 +117,7 @@ public class Main {
 
 
     //    Проверка на простое число
-    public static String isSimpleNumber(int num) {
+    public static String isSimpleNumber(Integer num) {
 //    Проверка на простое число: Напишите программу, которая определяет, является ли заданное число простым.
 //    Входные данные 17         //    Результат Число является простым.
 
@@ -121,8 +127,13 @@ public class Main {
             return "Число " + num + " не является простым.";
         }
 
+        if (absNumber % 2 == 0) {
+            return "Число " + num + " не является простым.";
+        }
+
+
         // Проверяем делимость числа на любые значения от 2 до квадратного корня из num
-        for (int i = 2; i <= Math.sqrt(absNumber); i++) {
+        for (int i = 3; i <= Math.sqrt(absNumber); i+=2) {
             if (num % i == 0) {
                 return "Число " + num + " не является простым."; // Если делится без остатка, значит число не простое
             }
